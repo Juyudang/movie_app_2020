@@ -1,64 +1,51 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-// function Food(props) {
-//   return <h1>I like { props.abc }</h1>;
-// }
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log('hello');
+  }
 
-function Food({ name, picture, rating }) {
-  return (
-    <div>
-      <h2>I like { name }</h2>
-      <h4>{ rating }/5.0</h4>
-      <img src={ picture } alt={ name } />
-    </div>
-  );
+  state = {
+    count: 0,
+  };
+
+  add = () => {
+    console.log('add');
+    this.setState(current => ({
+      count: current.count + 1,
+    }));
+  };
+
+  minus = () => {
+    console.log('minus');
+    this.setState(current => ({
+      count: this.state.count -1,
+    }));
+  };
+
+  componentDidMount() {
+    console.log('compnent rendered');
+  }
+
+  componentDidUpdate() {
+    console.log("I just updated");
+  }
+
+  componentWillUnmount() {
+    console.log('Goodbye, cruel world');
+  }
+  
+  render() {
+    console.log("I'm rendering");
+    return (
+      <div>
+        <h1>The number is: {this.state.count}</h1>
+        <button onClick={this.add}>Add</button>
+        <button onClick={this.minus}>Minus</button>
+      </div>
+    )
+  }
 }
 
-// function Food({ fav, abc }) {
-//   return <h1>I like { fav } and { abc }</h1>;
-// }
-
-const foodILike = [
-  {
-    id: 1,
-    name: 'Kimchi',
-    image: 'https://m.jnmall.kr/web/product/big/201910/4b83072de272a51edffa420ab3b2fa98.jpg',
-    rating: 5,
-  },
-  {
-    id: 2,
-    name: 'Samgyeopsal',
-    image: 'https://t1.daumcdn.net/liveboard/dailylife/222d88e5c7dc496c8e8a8a56c3452e52.JPG',
-    rating: 4.8,
-  },
-  {
-    id: 3,
-    name: 'Bibimbap',
-    image: 'https://craftlog.com/m/i/5708783=s1280=h960',
-    rating: 3,
-  },
-  {
-    id: 4,
-    name: 'Doncasu',
-    image: 'https://t1.daumcdn.net/cfile/tistory/998976505AA8C06921',
-    rating: 2.3,
-  },
-  {
-    id: 5,
-    name: 'Kimbap',
-    image: 'https://homecuisine.co.kr/files/attach/images/140/001/083/558d170258752df2dd76bef00861497f.JPG',
-    rating: 1.8,
-  },
-];
-
-function App() {
-  return (
-    <div>
-      {foodILike.map(dish => (
-        <Food key={dish.id} name={dish.name} picture={dish.image} rating={dish.rating} />
-      ))}
-    </div>
-  );
-}
 export default App;
